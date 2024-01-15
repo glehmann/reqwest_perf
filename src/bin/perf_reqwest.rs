@@ -3,7 +3,7 @@
 use statistical::mean;
 use tokio::{task, time::Instant};
 
-const BASE_URL: &str = "http://localhost:3000";
+const URL: &str = "http://localhost:3000/health";
 
 #[tokio::main]
 async fn main() {
@@ -20,7 +20,7 @@ async fn main() {
         .map(|_| {
             task::spawn(async move {
                 let now = Instant::now();
-                reqwest::get(format!("{BASE_URL}/health")).await.unwrap();
+                reqwest::get(URL).await.unwrap();
                 let duration = now.elapsed();
                 duration
             })
